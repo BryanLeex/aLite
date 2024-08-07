@@ -13,7 +13,10 @@
 #include <stdexcept>
 
 #include "Settings.h"
+
 #include "Utils/Logger.h"
+
+#include "Context/Event/Event.h"
 
 namespace Context::Window {
 
@@ -21,10 +24,38 @@ namespace Context::Window {
 
     public:
 
+        // Input Device Event
+        Event::Event<int32_t>               me_KeyPressedEvent;
+        Event::Event<int32_t>               me_KeyReleasedEvent;
+        Event::Event<int32_t>               me_KeyRepeatEvent;
+
+        Event::Event<int32_t>               me_MousePressedEvent;
+        Event::Event<int32_t>               me_MouseReleasedEvent;
+        Event::Event<float_t, float_t>      me_MouseScrollEvent;
+
+        // Window Event
+        Event::Event<uint32_t, uint32_t>    me_FrameBufferResize;
+        Event::Event<uint32_t, uint32_t>    me_ResizeEvent;
+
+        Event::Event<>                      me_WindowRefreshEvent;
+
+        Event::Event<int16_t, int16_t>      me_WindowMoveEvent;
+        Event::Event<int16_t, int16_t>      me_CursorMoveEvent;
+
+        Event::Event<>                      me_WindowMaximize;
+        Event::Event<>                      me_WindowMinimize;
+
+        Event::Event<>                      me_GainFocusEvent;
+        Event::Event<>                      me_LostFocusEvent;
+
+        Event::Event<>                      me_WindowCloseEvent;
+
         Window();
         explicit Window(WindowSetting &p_windowSetting);
 
         ~Window();
+
+        static Window* findInstance(GLFWwindow* p_window);
 
         std::pair<int16_t, int16_t>     getPosition();
 
@@ -32,17 +63,32 @@ namespace Context::Window {
 
         bool                            isWindowRunning();
 
+        void                            Close();
+
     private:
 
-        void initWindow();
+        inline void BindFrameBufferResizeCallback() const ;
+        inline void BindResizeCallback() const ;
+        inline void BindKeyActionCallback() const ;
+        inline void BindMouseButtonCallback() const ;
+        inline void BindMouseScrollCallback() const ;
+        inline void BindWindowMoveCallback() const ;
+        inline void BindCursorMoveCallback() const ;
+        inline void BindWindowMaximizeCallback() const ;
+        inline void BindWindowMinimizeCallback() const ;
+        inline void BindWindowFocusCallback() const ;
+        inline void BindWindowCloseCallback() const ;
+        inline void BindWindowRefreshCallback() const ;
+
+        inline void initWindow();
 
         static void initGLAD();
 
-        void createWindow();
+        inline void createWindow();
 
-        void updateSizeLimit();
+        inline void updateSizeLimit();
 
-        GLFWwindow*                         m_glfwWindow = nullptr;
+        GLFWwindow*                         m_glfwWindow{};
 
         std::string                         m_title;
 
