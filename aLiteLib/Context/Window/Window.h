@@ -59,6 +59,8 @@ namespace Context::Window {
 
         std::pair<int16_t, int16_t>     getPosition();
 
+        virtual void                    Tick();
+
         void                            SwapBuffer();
 
         bool                            isWindowRunning();

@@ -11,6 +11,7 @@ namespace Context {
 
         m_device = std::make_unique<Device::Device>();
         m_window = std::make_unique<Window::Window>();
+        m_camera = std::make_unique<Camera::Camera>(m_window.get());
 
     }
 
@@ -19,4 +20,11 @@ namespace Context {
         aLog("Context")->info("Context Destroy.");
 
     }
+
+    void Context::Tick() {
+
+        m_camera->Tick();
+
+    }
+
 } // Context

@@ -24,6 +24,12 @@ namespace Context::Window {
 
     }
 
+    void Window::Tick() {
+
+
+
+    }
+
     Window::~Window() {
 
         aLog("Window")->info("Window Destroy.");

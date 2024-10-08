@@ -1,9 +1,7 @@
 //
 // Created by Bryan on 06/08/2024.
 //
-
-#ifndef ALITE_SETTING_H
-#define ALITE_SETTING_H
+#pragma once
 
 #include <string>
 
@@ -39,5 +37,3 @@ namespace Context::Window {
     };
 
 }
-
-#endif //ALITE_SETTING_H

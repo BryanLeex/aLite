@@ -11,6 +11,7 @@
 
 #include "Context/Device/Device.h"
 #include "Context/Window/Window.h"
+#include "Context/Camera/Camera.h"
 
 namespace Context {
 
@@ -20,14 +21,19 @@ namespace Context {
         Context();
         ~Context();
 
+        void Tick();
+
         Device::Device* GetDevice() { return m_device.get(); }
 
         Window::Window* GetWindow() { return m_window.get(); }
+
+        Camera::Camera* GetCamera() { return m_camera.get(); }
 
     private:
 
         std::unique_ptr<Device::Device> m_device;
         std::unique_ptr<Window::Window> m_window;
+        std::unique_ptr<Camera::Camera> m_camera;
 
     };
 
